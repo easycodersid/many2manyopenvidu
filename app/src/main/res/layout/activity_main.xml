@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SessionActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sessionKeyTV">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/views_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <FrameLayout
+                    android:id="@+id/peer_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:translationZ="1dp"
+                        android:id="@+id/videoOffOn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|right"
+                        android:layout_marginEnd="52dp"
+                        android:src="@drawable/ic_videocam_on"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:translationZ="1dp"
+                        android:id="@+id/volumeOnOff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|right"
+                        android:src="@drawable/ic_volume_on"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:translationZ="1dp"
+                        android:id="@+id/switchCamera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|right"
+                        android:layout_marginEnd="108dp"
+                        android:src="@drawable/ic_camera_switch"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/main_participant"
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAccent" />
+
+                    <org.webrtc.SurfaceViewRenderer
+                        android:id="@+id/local_gl_surface_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="212dp"
+                        android:visibility="visible" />
+
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sessionKeyTV"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text=""
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sessionDetailsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="#FFF"
+            android:clickable="false"
+            android:elevation="5dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            tools:targetApi="lollipop">
+
+            <EditText
+                android:id="@+id/participant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:hint="Enter name"
+                android:textColor="#616161"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:inputType="number"
+                android:id="@+id/session_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:hint="Enter room name"
+                android:textColor="#616161"
+                android:textSize="14dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGrp" />
+
+            <RadioGroup
+                android:id="@+id/radioGrp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/participant_name">
+
+                <RadioButton
+                    android:id="@+id/createSessionRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:checked="true"
+                    android:text="Create session" />
+
+                <RadioButton
+                    android:id="@+id/joinSessionRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Join session" />
+
+                <RadioButton
+                    android:id="@+id/createClassRoomRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Create classroom" />
+
+                <RadioButton
+                    android:id="@+id/joinClassRoomRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Join classroom" />
+
+            </RadioGroup>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/joinRoomBtn"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@color/colorAccent"
+                android:text="Create"
+                android:textAllCaps="true"
+                android:textColor="#FFF"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/session_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/openFriendsList"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@color/colorPrimary"
+                android:text="Access friends"
+                android:textAllCaps="true"
+                android:textColor="#FFF"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/joinRoomBtn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/messageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:background="@drawable/bottomsheetbg"
+            android:clickable="false"
+            android:elevation="5dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:behavior_peekHeight="50dp"
+            app:layout_behavior=".helpers.CustomBottomSheetBehavior"
+            tools:targetApi="lollipop">
+
+            <Button
+                android:id="@+id/inviteBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="20dp"
+                android:text="Invite"
+                app:layout_constraintBottom_toTopOf="@+id/leaveRoomBtn" />
+
+            <Button
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/inviteBtn"
+                android:text="View participants"
+                android:id="@+id/viewParticipants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/toggleMessageLayout"
+                android:text="Open"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ListView
+                android:id="@+id/messageListView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/messageEditLayout"
+                app:layout_constraintTop_toBottomOf="@+id/toggleMessageLayout" />
+
+            <RelativeLayout
+                android:id="@+id/messageEditLayout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/viewParticipants">
+
+                <ImageButton
+                    android:id="@+id/sendMessageBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    app:srcCompat="@drawable/ic_sendmessage" />
+
+                <ImageButton
+                    android:id="@+id/shareFilesBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="4dp"
+                    android:visibility="visible"
+                    android:layout_toStartOf="@+id/sendMessageBtn"
+                    android:src="@drawable/ic_school_material" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/messageET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="24dp"
+                    android:hint="Type message here"
+                    android:layout_marginEnd="16dp"
+                    android:layout_toStartOf="@+id/shareFilesBtn"
+                    android:textColor="#616161"
+                    android:textSize="14dp" />
+
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/leaveRoomBtn"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/colorAccent"
+                android:text="Leave room"
+                android:textAllCaps="true"
+                android:textColor="#FFF"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/participantsBottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@drawable/bottomsheetbg"
+            android:clickable="false"
+            android:elevation="5dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:behavior_peekHeight="500dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            tools:targetApi="lollipop">
+
+            <ListView
+                android:id="@+id/participantsListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/partTitle" />
+
+            <TextView
+                android:id="@+id/partTitle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center|center_vertical"
+                android:text="Participants"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/closeParticipantsBtn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="close"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/friendsBottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@drawable/bottomsheetbg"
+            android:clickable="false"
+            android:elevation="5dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:behavior_peekHeight="500dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            tools:targetApi="lollipop">
+
+            <ListView
+                android:id="@+id/friendsListView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/friendsTitle"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/searchRespLayout"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="Search result"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/searchName"
+                    android:text=""
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/searchEmail"
+                    android:text=""
+                    android:layout_below="@+id/searchName"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:layout_marginRight="4dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/addFriend"
+                    android:text="Add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/friendsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center|center_vertical"
+                android:text="Friends"
+                app:layout_constraintTop_toBottomOf="@+id/searchRespLayout" />
+
+            <Button
+                android:id="@+id/closeFriendsBtn"
+                app:layout_constraintTop_toBottomOf="@+id/searchRespLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="X"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <ImageButton
+                android:id="@+id/searchFriendsBtn"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/searchRespLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_search_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

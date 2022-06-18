@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "428641028223",
+    "firebase_url": "https://videocalling-20aaa.firebaseio.com",
+    "project_id": "videocalling-20aaa",
+    "storage_bucket": "videocalling-20aaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428641028223:android:bfa6f49a79902a8238174a",
+        "android_client_info": {
+          "package_name": "in.app.chirpz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428641028223-sov3hlk8qs3j57rkn8lt2o39n1e2b9pt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXU-06xm6yX-phYksXMVRdWiX1Z8pSqCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428641028223-sov3hlk8qs3j57rkn8lt2o39n1e2b9pt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
